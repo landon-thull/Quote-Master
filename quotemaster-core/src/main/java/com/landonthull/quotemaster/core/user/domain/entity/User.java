@@ -1,4 +1,4 @@
-package com.landonthull.quotemaster.core.domain.entity;
+package com.landonthull.quotemaster.core.user.domain.entity;
 
 import java.sql.Timestamp;
 import java.util.UUID;
