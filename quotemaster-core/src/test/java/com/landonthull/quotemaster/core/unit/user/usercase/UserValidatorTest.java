@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.landonthull.quotemaster.core.user.domain.exception.UserValidationException;
-import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUser;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.validator.UserValidator;
 import org.junit.jupiter.api.BeforeAll;
