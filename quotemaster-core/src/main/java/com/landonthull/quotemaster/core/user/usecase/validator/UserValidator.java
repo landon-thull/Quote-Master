@@ -10,17 +10,17 @@ public class UserValidator {
     if (request == null) {
       throw new UserValidationException("Create user request should not be null");
     }
-    if (request.getEmail().isBlank()) {
-      throw new UserValidationException("Email should not be null");
+    if (request.getEmail() == null || request.getEmail().isBlank()) {
+      throw new UserValidationException("Email is required");
     }
-    if (request.getPassword().isBlank()) {
-      throw new UserValidationException("Password should not be null");
+    if (request.getPassword() == null || request.getPassword().isBlank()) {
+      throw new UserValidationException("Password is required");
     }
-    if (request.getFirstName().isBlank()) {
-      throw new UserValidationException("First name should not be null");
+    if (request.getFirstName() == null ||request.getFirstName().isBlank()) {
+      throw new UserValidationException("First is required");
     }
-    if (request.getLastName().isBlank()) {
-      throw new UserValidationException("Last name should not be null");
+    if (request.getLastName() == null || request.getLastName().isBlank()) {
+      throw new UserValidationException("Last is required");
     }
 
     if (request.getPassword().length() < 8) {
