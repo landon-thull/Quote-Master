@@ -46,7 +46,7 @@ public class CreateUserTest {
   }
 
   @Test
-  public void CreateUser_RequestValid_ReturnResponse() {
+  public void createUser_RequestValid_ReturnResponse() {
     when(userRepository.existsByEmail(anyString())).thenReturn(false);
     when(userRepository.save(any())).thenReturn(new User());
     when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
@@ -59,7 +59,7 @@ public class CreateUserTest {
   }
 
   @Test
-  public void CreateUser_UserAlreadyExists_ThrowUserAlreadyExistsException() {
+  public void createUser_UserAlreadyExists_ThrowUserAlreadyExistsException() {
     when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
     assertThrows(UserAlreadyExistsException.class, () -> createUser.execute(request));
