@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import com.landonthull.quotemaster.core.common.domain.exception.PersistenceException;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import com.landonthull.quotemaster.core.user.domain.exception.UserAlreadyExistsException;
 import com.landonthull.quotemaster.core.user.port.PasswordEncoder;
@@ -63,5 +64,12 @@ public class CreateUserTest {
     when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
     assertThrows(UserAlreadyExistsException.class, () -> createUser.execute(request));
+  }
+
+  @Test
+  public void createUser_ErrorSavingUser_ThrowPersistenceException() {
+    when(userRepository.save(any(User.class))).thenThrow(new RuntimeException("Exception"));
+
+    assertThrows(PersistenceException.class, () -> createUser.execute(request));
   }
 }
