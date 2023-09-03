@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.landonthull.quotemaster.core.common.domain.exception.RequestValidationException;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserRequest;
+import com.landonthull.quotemaster.core.user.usecase.disableuser.DisableUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.validator.UserValidator;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -156,6 +158,33 @@ public class UserValidatorTest {
     assertThrows(
         RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
+    );
+  }
+
+  @Test
+  public void validateDisableUserRequest_RequestValid_NoExceptionThrown() {
+    DisableUserRequest disableUserRequest = new DisableUserRequest(UUID.randomUUID());
+
+    assertDoesNotThrow(() -> UserValidator.validateDisableUserRequest(disableUserRequest));
+  }
+
+  @Test
+  public void validateDisableUserRequest_RequestNull_ThrowRequestValidationException() {
+    DisableUserRequest disableUserRequest = null;
+
+    assertThrows(
+        RequestValidationException.class,
+        () -> UserValidator.validateDisableUserRequest(disableUserRequest)
+    );
+  }
+
+  @Test
+  public void validateDisableUserRequest_UuidNull_ThrowRequestValidationException() {
+    DisableUserRequest disableUserRequest = new DisableUserRequest(null);
+
+    assertThrows(
+        RequestValidationException.class,
+        () -> UserValidator.validateDisableUserRequest(disableUserRequest)
     );
   }
 }
