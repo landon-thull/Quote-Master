@@ -3,7 +3,7 @@ package com.landonthull.quotemaster.core.unit.user.usercase;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.landonthull.quotemaster.core.user.domain.exception.UserValidationException;
+import com.landonthull.quotemaster.core.common.domain.exception.RequestValidationException;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.validator.UserValidator;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,7 +29,7 @@ public class UserValidatorTest {
   }
 
   @Test
-  public void validateCreateUserRequest_FieldNull_ThrowUserValidationException() {
+  public void validateCreateUserRequest_FieldNull_ThrowRequestValidationException() {
     CreateUserRequest badRequest = new CreateUserRequest(
         null,
         "mypassword123",
@@ -38,28 +38,28 @@ public class UserValidatorTest {
     );
 
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setEmail("email@email.com");
     badRequest.setPassword(null);
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setPassword("mypassword123");
     badRequest.setFirstName(null);
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setFirstName("MyFirstName");
     badRequest.setLastName(null);
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
   }
@@ -74,34 +74,34 @@ public class UserValidatorTest {
     );
 
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setEmail("email@email.com");
     badRequest.setPassword("");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setPassword("mypassword123");
     badRequest.setFirstName("");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
 
     badRequest.setFirstName("MyFirstName");
     badRequest.setLastName("");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
   }
 
   @Test
-  public void validateCreateUserRequest_EmailInvalid_ThrowUserValidationException() {
+  public void validateCreateUserRequest_EmailInvalid_ThrowRequestValidationException() {
     CreateUserRequest badEmailRequest = new CreateUserRequest(
         "",
         "mypassword123",
@@ -109,37 +109,37 @@ public class UserValidatorTest {
         "Mylastname"
     );
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
 
     badEmailRequest.setEmail("@email.com");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
 
     badEmailRequest.setEmail("bademailATemail.com");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
 
     badEmailRequest.setEmail("bademail@emailcom");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
 
     badEmailRequest.setEmail("bademail@.com");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
 
     badEmailRequest.setEmail("@email.com");
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badEmailRequest)
     );
   }
@@ -154,7 +154,7 @@ public class UserValidatorTest {
     );
 
     assertThrows(
-        UserValidationException.class,
+        RequestValidationException.class,
         () -> UserValidator.validateCreateUserRequest(badRequest)
     );
   }
