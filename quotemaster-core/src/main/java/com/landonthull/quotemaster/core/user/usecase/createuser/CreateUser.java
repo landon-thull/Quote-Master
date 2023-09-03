@@ -1,5 +1,6 @@
 package com.landonthull.quotemaster.core.user.usecase.createuser;
 
+import com.landonthull.quotemaster.core.common.domain.exception.PersistenceException;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import com.landonthull.quotemaster.core.user.domain.exception.UserAlreadyExistsException;
 import com.landonthull.quotemaster.core.user.port.PasswordEncoder;
@@ -35,7 +36,11 @@ public final class CreateUser {
     user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
     user.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 
-    userRepository.save(user);
+    try {
+      userRepository.save(user);
+    } catch (Exception e) {
+      throw new PersistenceException("Error encountered while saving user data", e);
+    }
 
     return new CreateUserResponse(user.getId(), user.getEmail(), user.getCreatedAt());
   }
