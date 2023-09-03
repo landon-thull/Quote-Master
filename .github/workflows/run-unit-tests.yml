@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
+    permissions: write-all
 
     steps:
       - name: Checkout
