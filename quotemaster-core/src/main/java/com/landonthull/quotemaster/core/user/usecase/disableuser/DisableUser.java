@@ -3,7 +3,7 @@ package com.landonthull.quotemaster.core.user.usecase.disableuser;
 import com.landonthull.quotemaster.core.common.domain.exception.PersistenceException;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import com.landonthull.quotemaster.core.user.domain.exception.UserNotFoundException;
-import com.landonthull.quotemaster.core.user.port.UserRepository;
+import com.landonthull.quotemaster.core.user.port.in.UserRepository;
 import com.landonthull.quotemaster.core.user.usecase.validator.UserValidator;
 import java.util.Optional;
 

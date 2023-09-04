@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import com.landonthull.quotemaster.core.common.domain.exception.PersistenceException;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import com.landonthull.quotemaster.core.user.domain.exception.UserNotFoundException;
-import com.landonthull.quotemaster.core.user.port.UserRepository;
+import com.landonthull.quotemaster.core.user.port.in.UserRepository;
 import com.landonthull.quotemaster.core.user.usecase.disableuser.DisableUser;
 import com.landonthull.quotemaster.core.user.usecase.disableuser.DisableUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.disableuser.DisableUserResponse;
