@@ -1,4 +1,4 @@
-package com.landonthull.quotemaster.core.user.port;
+package com.landonthull.quotemaster.core.user.port.in;
 
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import java.util.Optional;
