@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.landonthull.quotemaster.core.common.domain.exception.RequestValidationException;
+import com.landonthull.quotemaster.core.user.domain.entity.UserRole;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.disableuser.DisableUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.validator.UserValidator;
@@ -21,7 +22,8 @@ public class UserValidatorTest {
         "testemail@email.com",
         "mypassword123",
         "Myfirstname",
-        "Mylastname"
+        "Mylastname",
+        UserRole.SALES_REPRESENTATIVE
     );
   }
 
@@ -36,8 +38,8 @@ public class UserValidatorTest {
         null,
         "mypassword123",
         "Myfirstname",
-        "Mylastname"
-    );
+        "Mylastname",
+        UserRole.SALES_REPRESENTATIVE);
 
     assertThrows(
         RequestValidationException.class,
@@ -72,7 +74,8 @@ public class UserValidatorTest {
         "",
         "mypassword123",
         "Myfirstname",
-        "Mylastname"
+        "Mylastname",
+        UserRole.SALES_REPRESENTATIVE
     );
 
     assertThrows(
@@ -108,7 +111,8 @@ public class UserValidatorTest {
         "",
         "mypassword123",
         "Myfirstname",
-        "Mylastname"
+        "Mylastname",
+        UserRole.SALES_REPRESENTATIVE
     );
     assertThrows(
         RequestValidationException.class,
@@ -152,7 +156,8 @@ public class UserValidatorTest {
         "email@email.com",
         "short",
         "MyFirstName",
-        "MyLastName"
+        "MyLastName",
+        UserRole.SALES_REPRESENTATIVE
     );
 
     assertThrows(
