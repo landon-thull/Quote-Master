@@ -2,6 +2,7 @@ package com.landonthull.quotemaster.infrastructure.postgres.user;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -9,7 +10,10 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Table(name = "app_user")
+@Table(
+    name = "app_user",
+    indexes = @Index(name = "email_index", columnList = "email")
+)
 public class JpaUserEntity {
 
   @Id
