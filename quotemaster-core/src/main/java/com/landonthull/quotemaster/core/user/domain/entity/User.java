@@ -9,7 +9,7 @@ public class User {
   private String email;
   private String password;
   private boolean isActive;
-  // TODO add authority
+  private UserRole role;
   private String lastName;
   private String firstName;
   private Timestamp createdAt;
@@ -18,12 +18,13 @@ public class User {
   public User() {
   }
 
-  public User(UUID id, String email, String password, boolean isActive, String lastName,
+  public User(UUID id, String email, String password, boolean isActive, UserRole role, String lastName,
       String firstName, Timestamp createdAt, Timestamp updatedAt) {
     this.id = id;
     this.email = email;
     this.password = password;
     this.isActive = isActive;
+    this.role = role;
     this.lastName = lastName;
     this.firstName = firstName;
     this.createdAt = createdAt;
@@ -92,5 +93,13 @@ public class User {
 
   public void setUpdatedAt(Timestamp updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public UserRole getRole() {
+    return role;
+  }
+
+  public void setRole(UserRole role) {
+    this.role = role;
   }
 }
