@@ -1,6 +1,9 @@
 package com.landonthull.quotemaster.infrastructure.postgres.user;
 
+import com.landonthull.quotemaster.core.user.domain.entity.UserRole;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.PrePersist;
@@ -25,6 +28,9 @@ public class JpaUserEntity {
 
   private boolean isActive;
 
+  @Enumerated(EnumType.STRING)
+  private UserRole role;
+
   private String lastName;
 
   private String firstName;
@@ -45,12 +51,14 @@ public class JpaUserEntity {
     updatedAt = new Timestamp(System.currentTimeMillis());
   }
 
-  public JpaUserEntity(UUID id, String email, String password, boolean isActive, String lastName,
+  public JpaUserEntity(UUID id, String email, String password, boolean isActive, UserRole role,
+      String lastName,
       String firstName, Timestamp createdAt, Timestamp updatedAt) {
     this.id = id;
     this.email = email;
     this.password = password;
     this.isActive = isActive;
+    this.role = role;
     this.lastName = lastName;
     this.firstName = firstName;
     this.createdAt = createdAt;
@@ -122,5 +130,13 @@ public class JpaUserEntity {
 
   public void setUpdatedAt(Timestamp updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public UserRole getRole() {
+    return role;
+  }
+
+  public void setRole(UserRole role) {
+    this.role = role;
   }
 }

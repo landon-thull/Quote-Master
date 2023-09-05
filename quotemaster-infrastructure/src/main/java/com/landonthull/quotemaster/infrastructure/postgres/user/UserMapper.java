@@ -11,6 +11,7 @@ public class UserMapper {
     jpaEntity.setId(user.getId());
     jpaEntity.setEmail(user.getEmail());
     jpaEntity.setActive(user.isActive());
+    jpaEntity.setRole(user.getRole());
     jpaEntity.setPassword(user.getPassword());
     jpaEntity.setLastName(user.getLastName());
     jpaEntity.setFirstName(user.getFirstName());
@@ -25,6 +26,7 @@ public class UserMapper {
     user.setId(jpaEntity.getId());
     user.setEmail(jpaEntity.getEmail());
     user.setActive(jpaEntity.isActive());
+    user.setRole(jpaEntity.getRole());
     user.setPassword(jpaEntity.getPassword());
     user.setLastName(jpaEntity.getLastName());
     user.setFirstName(jpaEntity.getFirstName());
