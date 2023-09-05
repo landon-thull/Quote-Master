@@ -1,9 +1,7 @@
-package com.landonthull.quotemaster;
+package com.landonthull.quotemaster.app;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 class QuoteMasterApplicationTests {
 
   @Test
