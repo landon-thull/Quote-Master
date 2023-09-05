@@ -39,6 +39,11 @@ public class PostgresUserRepository implements UserRepository {
   }
 
   @Override
+  public Optional<User> findByEmail(String email) {
+    return jpaUserRepository.findByEmail(email);
+  }
+
+  @Override
   public boolean existsByEmail(String email) {
     return jpaUserRepository.existsByEmail(email);
   }
