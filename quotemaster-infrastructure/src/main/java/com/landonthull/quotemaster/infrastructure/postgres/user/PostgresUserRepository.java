@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PostgresUserRepository implements UserRepository {
 
-  private UserMapper userMapper;
+  private final UserMapper userMapper;
 
-  private JpaUserRepository jpaUserRepository;
+  private final JpaUserRepository jpaUserRepository;
 
   public PostgresUserRepository(UserMapper userMapper, JpaUserRepository jpaUserRepository) {
     this.userMapper = userMapper;
@@ -28,19 +28,22 @@ public class PostgresUserRepository implements UserRepository {
   @Override
   public Optional<User> findById(UUID id) {
     Optional<JpaUserEntity> optionalJpaUserEntity = jpaUserRepository.findById(id);
-    if (optionalJpaUserEntity.isEmpty()) {
-      return Optional.empty();
-    }
+
+    if (optionalJpaUserEntity.isEmpty()) return Optional.empty();
 
     JpaUserEntity jpaUserEntity = optionalJpaUserEntity.get();
-
     User foundUser = userMapper.toDomainEntity(jpaUserEntity);
     return Optional.of(foundUser);
   }
 
   @Override
   public Optional<User> findByEmail(String email) {
-    return jpaUserRepository.findByEmail(email);
+    Optional<JpaUserEntity> optionalJpaUserEntity = jpaUserRepository.findByEmail(email);
+    if (optionalJpaUserEntity.isEmpty()) return Optional.empty();
+
+    JpaUserEntity jpaUserEntity = optionalJpaUserEntity.get();
+    User foundUser = userMapper.toDomainEntity(jpaUserEntity);
+    return Optional.of(foundUser);
   }
 
   @Override
