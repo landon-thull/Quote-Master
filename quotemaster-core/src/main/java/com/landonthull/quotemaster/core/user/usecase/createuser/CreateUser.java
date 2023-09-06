@@ -31,6 +31,7 @@ public final class CreateUser {
     user.setEmail(request.getEmail());
     user.setPassword(passwordEncoder.encode(request.getPassword()));
     user.setActive(true);
+    user.setRole(request.getUserRole());
     user.setLastName(request.getLastName());
     user.setFirstName(request.getFirstName());
     user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
