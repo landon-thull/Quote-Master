@@ -1,5 +1,7 @@
 package com.landonthull.quotemaster.app.auth;
 
+import com.landonthull.quotemaster.app.dto.SignInRequest;
+import com.landonthull.quotemaster.app.dto.SignInResponse;
 import com.landonthull.quotemaster.app.util.JwtTokenUtil;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
 import com.landonthull.quotemaster.core.user.port.in.UserRepository;

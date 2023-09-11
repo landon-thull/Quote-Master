@@ -1,4 +1,4 @@
-package com.landonthull.quotemaster.app.auth;
+package com.landonthull.quotemaster.app.dto;
 
 public class SignInResponse {
 
