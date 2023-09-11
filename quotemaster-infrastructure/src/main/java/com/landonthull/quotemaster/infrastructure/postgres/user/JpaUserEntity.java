@@ -1,24 +1,58 @@
-package com.landonthull.quotemaster.core.user.domain.entity;
+package com.landonthull.quotemaster.infrastructure.postgres.user;
 
+import com.landonthull.quotemaster.core.user.domain.entity.UserRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class User {
+@Entity
+@Table(
+    name = "app_user",
+    indexes = @Index(name = "email_index", columnList = "email")
+)
+public class JpaUserEntity {
 
+  @Id
   private UUID id;
+
   private String email;
+
   private String password;
+
   private boolean isActive;
+
+  @Enumerated(EnumType.STRING)
   private UserRole role;
+
   private String lastName;
+
   private String firstName;
+
   private Timestamp createdAt;
+
   private Timestamp updatedAt;
 
-  public User() {
+  // sets createdAt timestamp when entity is persisted
+  @PrePersist
+  protected void onCreate() {
+    createdAt = new Timestamp(System.currentTimeMillis());
   }
 
-  public User(UUID id, String email, String password, boolean isActive, UserRole role, String lastName,
+  // sets updatedAt timestamp when entity is updated
+  @PreUpdate
+  protected void onUpdate() {
+    updatedAt = new Timestamp(System.currentTimeMillis());
+  }
+
+  public JpaUserEntity(UUID id, String email, String password, boolean isActive, UserRole role,
+      String lastName,
       String firstName, Timestamp createdAt, Timestamp updatedAt) {
     this.id = id;
     this.email = email;
@@ -29,6 +63,9 @@ public class User {
     this.firstName = firstName;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+  }
+
+  public JpaUserEntity() {
   }
 
   public UUID getId() {

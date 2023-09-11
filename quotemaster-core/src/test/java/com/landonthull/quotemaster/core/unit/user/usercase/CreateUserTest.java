@@ -9,9 +9,10 @@ import static org.mockito.Mockito.when;
 
 import com.landonthull.quotemaster.core.common.domain.exception.PersistenceException;
 import com.landonthull.quotemaster.core.user.domain.entity.User;
+import com.landonthull.quotemaster.core.user.domain.entity.UserRole;
 import com.landonthull.quotemaster.core.user.domain.exception.UserAlreadyExistsException;
-import com.landonthull.quotemaster.core.user.port.PasswordEncoder;
-import com.landonthull.quotemaster.core.user.port.UserRepository;
+import com.landonthull.quotemaster.core.user.port.in.PasswordEncoder;
+import com.landonthull.quotemaster.core.user.port.in.UserRepository;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUser;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserRequest;
 import com.landonthull.quotemaster.core.user.usecase.createuser.CreateUserResponse;
@@ -42,7 +43,8 @@ public class CreateUserTest {
         "useremail@email.com",
         "unencodedPassword",
         "first",
-        "user"
+        "user",
+        UserRole.SALES_REPRESENTATIVE
     );
   }
 

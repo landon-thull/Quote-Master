@@ -1,4 +1,4 @@
-package com.landonthull.quotemaster.core.user.port;
+package com.landonthull.quotemaster.core.user.port.in;
 
 public interface PasswordEncoder {
 
