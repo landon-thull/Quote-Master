@@ -24,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateUserTest {
+public class CreateUserTests {
 
   @Mock
   private UserRepository userRepository;

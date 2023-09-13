@@ -23,7 +23,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class DisableUserTest {
+public class DisableUserTests {
 
   @Mock
   private UserRepository userRepository;

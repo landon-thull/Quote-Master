@@ -10,7 +10,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class UserMapperTest {
+public class UserMapperTests {
 
   private final UserMapper userMapper = new UserMapper();
 
