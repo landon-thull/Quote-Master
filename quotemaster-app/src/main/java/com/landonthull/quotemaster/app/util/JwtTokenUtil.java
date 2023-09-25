@@ -6,11 +6,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtTokenUtil {
+  private final Logger logger = LoggerFactory.getLogger(JwtTokenUtil.class);
 
   private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60 * 1000;
 
@@ -26,6 +29,7 @@ public class JwtTokenUtil {
   }
 
   public String generateAccessToken(User user) {
+    logger.info(String.format("Generating JWT for user %s.", user.getEmail()));
     return Jwts.builder()
         .setSubject(user.getEmail())
         .setIssuer("QuoteMaster")
