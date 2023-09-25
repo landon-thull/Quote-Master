@@ -14,17 +14,20 @@ public class Customer {
   private Timestamp updatedAt;
 
   public Customer() {
+    this.id = UUID.randomUUID();
+    this.status = CustomerStatus.ACTIVE;
+    this.createdAt = new Timestamp(System.currentTimeMillis());
+    this.updatedAt = new Timestamp(System.currentTimeMillis());
   }
 
-  public Customer(UUID id, String name, String notes, String industry,
-      Timestamp createdAt, Timestamp updatedAt) {
-    this.id = id;
+  public Customer(String name, String notes, String industry) {
+    this.id = UUID.randomUUID();
     this.name = name;
     this.notes = notes;
     this.status = CustomerStatus.ACTIVE;
     this.industry = industry;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    this.createdAt = new Timestamp(System.currentTimeMillis());
+    this.updatedAt = new Timestamp(System.currentTimeMillis());
   }
 
   public UUID getId() {
