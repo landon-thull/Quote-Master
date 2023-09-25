@@ -24,7 +24,7 @@ public class Customer {
     this.status = CustomerStatus.ACTIVE;
     this.industry = industry;
     this.createdAt = createdAt;
-    this.createdAt = updatedAt;
+    this.updatedAt = updatedAt;
   }
 
   public UUID getId() {
