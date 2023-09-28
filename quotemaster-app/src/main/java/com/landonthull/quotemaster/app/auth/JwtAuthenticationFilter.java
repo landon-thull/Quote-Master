@@ -7,6 +7,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,6 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+  private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
   private final JwtTokenUtil jwtTokenUtil;
   private final UserDetail userDetail;
@@ -35,6 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException {
+    logger.info("Attempting to authenticate request from {}...", request.getRemoteAddr());
+
     final String authHeader = request.getHeader("Authorization");
     final String jwt;
     final String userEmail;
@@ -43,6 +48,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         !StringUtils.hasLength(authHeader) ||
         !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")
     ) {
+      logger.info(
+          "Request from {} could not be authenticated, missing authorization header",
+          request.getRemoteAddr()
+      );
       filterChain.doFilter(request, response);
       return;
     }
@@ -53,14 +62,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().getAuthentication() == null
     ) {
       UserDetails userDetails = userDetail.loadUserByUsername(userEmail);
-      System.out.println(userDetails.getAuthorities());
       if (jwtTokenUtil.isTokenValid(jwt, userDetails)) {
+        logger.info("Request from {} successfully authenticated", request.getRemoteAddr());
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
             userDetails, null, userDetails.getAuthorities());
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         context.setAuthentication(authToken);
         SecurityContextHolder.setContext(context);
+      } else {
+        logger.info("Request from {} could not be authenticated", request.getRemoteAddr());
       }
     }
     filterChain.doFilter(request, response);

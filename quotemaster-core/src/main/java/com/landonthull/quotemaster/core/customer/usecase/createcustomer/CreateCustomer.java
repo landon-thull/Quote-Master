@@ -33,7 +33,7 @@ public class CreateCustomer {
 
     Customer customer = new Customer(request.getName(), request.getNotes(), request.getIndustry());
 
-    logger.info(String.format("Saving customer with name %s.", customer.getName()));
+    logger.info("Saving customer with name '{}'", request.getName());
     return customerRepository.save(customer);
   }
 }
