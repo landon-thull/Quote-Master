@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class PasswordEncoderImplTest {
+public class PasswordEncoderImplTests {
 
   // low strength to reduce test runtime
   private final BCryptPasswordEncoder bCryptPasswordEncoder =

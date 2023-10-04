@@ -12,7 +12,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class UserValidatorTest {
+public class UserValidatorTests {
 
   private static CreateUserRequest request;
 

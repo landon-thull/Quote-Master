@@ -1,5 +1,7 @@
 package com.landonthull.quotemaster.app.config;
 
+import com.landonthull.quotemaster.core.customer.port.in.CustomerRepository;
+import com.landonthull.quotemaster.core.customer.port.out.CustomerService;
 import com.landonthull.quotemaster.core.user.port.in.PasswordEncoder;
 import com.landonthull.quotemaster.core.user.port.in.UserRepository;
 import com.landonthull.quotemaster.core.user.port.out.UserService;
@@ -20,5 +22,10 @@ public class PostgresConfig {
   @Bean
   public UserService getUserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
     return new UserService(userRepository, passwordEncoder);
+  }
+
+  @Bean
+  public CustomerService getCustomerService(CustomerRepository customerRepository) {
+    return new CustomerService(customerRepository);
   }
 }
