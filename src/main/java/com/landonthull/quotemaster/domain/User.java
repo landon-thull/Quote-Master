@@ -12,6 +12,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -32,6 +33,11 @@ public class User {
   @NotBlank(message = "Email is required")
   @Column(name = "email")
   private String email;
+  
+  @NotBlank
+  @Min(message = "Password must be 8 characters or longer", value = 8)
+  @Column(name = "password")
+  private String password;
 
   @NotNull
   @Column(name = "active")
@@ -68,10 +74,11 @@ public class User {
     updatedAt = new Timestamp(System.currentTimeMillis());
   }
 
-  public User(Long id, String email, boolean isActive, UserRole role, String lastName,
+  public User(Long id, String email, String password, boolean isActive, UserRole role, String lastName,
       String firstName, Timestamp createdAt, Timestamp updatedAt) {
     this.id = id;
     this.email = email;
+    this.password = password;
     this.isActive = isActive;
     this.role = role;
     this.lastName = lastName;
@@ -80,8 +87,9 @@ public class User {
     this.updatedAt = updatedAt;
   }
 
-  public User(String email, String lastName, String firstName) {
+  public User(String email, String password, String lastName, String firstName) {
     this.email = email;
+    this.password = password;
     this.lastName = lastName;
     this.firstName = firstName;
 
@@ -111,6 +119,14 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public String getPassword() {
+    return this.password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public boolean isActive() {
