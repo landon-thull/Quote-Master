@@ -21,10 +21,11 @@ public class UserTests {
   @Test
   void someArgsConstructor_defaultFieldsSet() {
     final String EMAIL = "email@email.com";
+    final String PASSWORD = "hashed_password";
     final String FIRST_NAME = "First";
     final String LAST_NAME = "Last";
 
-    User user = new User(EMAIL, LAST_NAME, FIRST_NAME);
+    User user = new User(EMAIL, PASSWORD, LAST_NAME, FIRST_NAME);
 
     assertTrue(user.isActive());
     assertEquals(user.getRole(), UserRole.SALES_REPRESENTATIVE);
@@ -38,6 +39,7 @@ public class UserTests {
   void allArgsConstructor_setsFieldsCorrectly() {
     final long ID = 1L;
     final String EMAIL = "email@email.com";
+    final String PASSWORD = "hashed_password";
     final boolean IS_ACTIVE = false;
     final UserRole ROLE = UserRole.ADMINISTRATOR;
     final String LAST_NAME = "Last";
@@ -48,6 +50,7 @@ public class UserTests {
     User user = new User(
         ID,
         EMAIL,
+        PASSWORD,
         IS_ACTIVE,
         ROLE,
         LAST_NAME,
@@ -58,6 +61,7 @@ public class UserTests {
 
     assertEquals(user.getId(), ID);
     assertEquals(user.getEmail(), EMAIL);
+    assertEquals(user.getPassword(), PASSWORD);
     assertEquals(user.isActive(), IS_ACTIVE);
     assertEquals(user.getRole(), ROLE);
     assertEquals(user.getLastName(), LAST_NAME);
@@ -72,6 +76,7 @@ public class UserTests {
 
     final long ID = 1L;
     final String EMAIL = "email@email.com";
+    final String PASSWORD = "hashed_password";
     final boolean IS_ACTIVE = false;
     final UserRole ROLE = UserRole.ADMINISTRATOR;
     final String LAST_NAME = "Last";
@@ -81,6 +86,7 @@ public class UserTests {
 
     user.setId(ID);
     user.setEmail(EMAIL);
+    user.setPassword(PASSWORD);
     user.setActive(IS_ACTIVE);
     user.setRole(ROLE);
     user.setLastName(LAST_NAME);
@@ -90,6 +96,7 @@ public class UserTests {
 
     assertEquals(user.getId(), ID);
     assertEquals(user.getEmail(), EMAIL);
+    assertEquals(user.getPassword(), PASSWORD);
     assertEquals(user.isActive(), IS_ACTIVE);
     assertEquals(user.getRole(), ROLE);
     assertEquals(user.getLastName(), LAST_NAME);
