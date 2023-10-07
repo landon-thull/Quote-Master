@@ -19,11 +19,6 @@ public class JwtTokenUtil {
   @Value("${security.jwt-secret-key}")
   private String SECRET_KEY;
 
-  public void logValues() {
-    System.out.println(JWT_TOKEN_VALIDITY);
-    System.out.println(SECRET_KEY);
-  }
-
   public String extractEmail(String token) {
     return extractClaim(token, Claims::getSubject);
   }
