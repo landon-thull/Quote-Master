@@ -12,9 +12,9 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
@@ -35,7 +35,8 @@ public class User {
   private String email;
   
   @NotBlank
-  @Min(message = "Password must be 8 characters or longer", value = 8)
+  @Size(min = 8, message = "Password must be 8 characters or longer")
+  @Size(max = 32, message = "Password must be 32 characters or shorter")
   @Column(name = "password")
   private String password;
 
