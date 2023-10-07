@@ -24,15 +24,13 @@ jobs:
           distribution: 'corretto'
           java-version: '17'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
 
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+      - name: Run the Gradle package task
+        uses: gradle/gradle-build-action@v2
+        with:
+          args: -b ci.gradle package
 
       - name: Report
         uses: dorny/test-reporter@v1
