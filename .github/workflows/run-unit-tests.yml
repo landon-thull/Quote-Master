@@ -27,16 +27,17 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Run the Gradle package task
+      - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        with:
-          args: -b ci.gradle package
+
+      - name: Execute Gradle build
+        run: ./gradlew build
 
       - name: Report
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Gradle Tests
-          path: '**/build/test-results/test/TEST-*.xml'
+          path: '**/build/test-results/test/TEST*.xml'
           reporter: java-junit
           fail-on-error: true
