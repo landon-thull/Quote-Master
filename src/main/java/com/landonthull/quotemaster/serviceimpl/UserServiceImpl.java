@@ -2,7 +2,6 @@ package com.landonthull.quotemaster.serviceimpl;
 
 import com.landonthull.quotemaster.domain.User;
 import com.landonthull.quotemaster.dto.CreateUserRequest;
-import com.landonthull.quotemaster.dto.CreateUserResponse;
 import com.landonthull.quotemaster.exception.ResourceAlreadyExistsException;
 import com.landonthull.quotemaster.repository.UserRepository;
 import com.landonthull.quotemaster.service.UserService;
@@ -21,7 +20,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public CreateUserResponse createUser(CreateUserRequest request) {
+  public User createUser(CreateUserRequest request) {
 
     if (userRepository.existsByEmail(request.getEmail())) {
       throw new ResourceAlreadyExistsException("User", "email", request.getEmail());
@@ -36,12 +35,6 @@ public class UserServiceImpl implements UserService {
         request.getFirstName()
     );
 
-    User savedUser = userRepository.save(user);
-
-    return new CreateUserResponse(
-        user.getId(),
-        user.getEmail(),
-        user.getCreatedAt()
-    );
+    return userRepository.save(user);
   }
 }
