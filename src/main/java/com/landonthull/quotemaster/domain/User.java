@@ -30,7 +30,7 @@ public class User {
 
   @Email(message = "Email must be correctly formatted")
   @NotBlank(message = "Email is required")
-  @Column(name = "email")
+  @Column(name = "email", unique = true)
   private String email;
   
   @NotBlank
