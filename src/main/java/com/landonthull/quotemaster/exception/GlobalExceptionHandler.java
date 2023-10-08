@@ -25,6 +25,14 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(getErrorsMap(errors), HttpStatus.BAD_REQUEST);
   }
 
+  @ExceptionHandler(ResourceAlreadyExistsException.class)
+  public ResponseEntity<String> handleResourceAlreadyExistsError(
+      ResourceAlreadyExistsException ex) {
+    String message = ex.getMessage();
+
+    return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+  }
+
   private Map<String, List<String>> getErrorsMap(List<String> errors) {
     Map<String, List<String>> errorResponse = new HashMap<>();
     errorResponse.put("errors", errors);
