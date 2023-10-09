@@ -2,14 +2,18 @@ package com.landonthull.quotemaster.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -37,6 +41,9 @@ public class Customer {
   @Column(name = "updated_at")
   private Timestamp updatedAt;
 
+  @OneToMany(mappedBy = "customer_id", fetch = FetchType.LAZY)
+  private List<Quote> quotes = new ArrayList<>();
+
   @PrePersist
   private void onCreate() {
     this.createdAt = new Timestamp(System.currentTimeMillis());
@@ -48,13 +55,14 @@ public class Customer {
   }
 
   public Customer(Long id, String name, String notes, String industry, Timestamp createdAt,
-      Timestamp updatedAt) {
+      Timestamp updatedAt, List<Quote> quotes) {
     this.id = id;
     this.name = name;
     this.notes = notes;
     this.industry = industry;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.quotes = quotes;
   }
 
   public Customer(String name, String notes, String industry) {
@@ -112,5 +120,13 @@ public class Customer {
 
   public void setUpdatedAt(Timestamp updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public List<Quote> getQuotes() {
+    return quotes;
+  }
+
+  public void setQuotes(List<Quote> quotes) {
+    this.quotes = quotes;
   }
 }
