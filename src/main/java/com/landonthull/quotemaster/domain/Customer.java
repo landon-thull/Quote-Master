@@ -41,7 +41,7 @@ public class Customer {
   @Column(name = "updated_at")
   private Timestamp updatedAt;
 
-  @OneToMany(mappedBy = "customer_id", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
   private List<Quote> quotes = new ArrayList<>();
 
   @PrePersist
