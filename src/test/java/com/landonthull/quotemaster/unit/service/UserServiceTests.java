@@ -13,6 +13,7 @@ import com.landonthull.quotemaster.dto.CreateUserRequest;
 import com.landonthull.quotemaster.exception.ResourceAlreadyExistsException;
 import com.landonthull.quotemaster.repository.UserRepository;
 import com.landonthull.quotemaster.serviceimpl.UserServiceImpl;
+import com.landonthull.quotemaster.util.JwtTokenUtil;
 import java.sql.Timestamp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,8 @@ public class UserServiceTests {
   @BeforeEach
   void setup() {
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    userService = new UserServiceImpl(userRepository, bCryptPasswordEncoder);
+    JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+    userService = new UserServiceImpl(userRepository, bCryptPasswordEncoder, jwtTokenUtil);
   }
 
   @Test
