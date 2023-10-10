@@ -53,7 +53,7 @@ public class SecurityConfig {
             .accessDeniedHandler(accessDeniedHandler())
         )
         .authorizeHttpRequests((authz) -> authz
-            .requestMatchers("/login", "/v3/api-docs/**", "/swagger-ui/**", "/v2/api-docs/**", "/swagger-resources/**").permitAll()
+            .requestMatchers("/login", "/error", "/v3/api-docs/**", "/swagger-ui/**", "/v2/api-docs/**", "/swagger-resources/**").permitAll()
             .anyRequest().authenticated()
         );
     return http.build();
