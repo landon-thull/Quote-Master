@@ -8,6 +8,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -17,7 +18,10 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "quote")
+@Table(
+    name = "quote",
+    indexes = @Index(name = "customer_id_index", columnList = "customer_id")
+)
 public class Quote {
 
   @Id
