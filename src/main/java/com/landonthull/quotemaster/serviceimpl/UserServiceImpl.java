@@ -5,6 +5,9 @@ import com.landonthull.quotemaster.dto.CreateUserRequest;
 import com.landonthull.quotemaster.exception.ResourceAlreadyExistsException;
 import com.landonthull.quotemaster.repository.UserRepository;
 import com.landonthull.quotemaster.service.UserService;
+import com.landonthull.quotemaster.util.JwtTokenUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +16,13 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final JwtTokenUtil jwtTokenUtil;
 
-  public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+  public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+      JwtTokenUtil jwtTokenUtil) {
     this.userRepository = userRepository;
     this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.jwtTokenUtil = jwtTokenUtil;
   }
 
   @Override
@@ -36,5 +42,24 @@ public class UserServiceImpl implements UserService {
     );
 
     return userRepository.save(user);
+  }
+
+  @Override
+  public User getCurrentUser(HttpServletRequest request) {
+
+    String header = request.getHeader("Authorization");
+
+    // slice 'Bearer ' off of token
+    String token = header.substring(7);
+
+    String email = jwtTokenUtil.extractEmail(token);
+
+    Optional<User> userOptional = userRepository.findByEmail(email);
+
+    if (userOptional.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+
+    return userOptional.get();
   }
 }
