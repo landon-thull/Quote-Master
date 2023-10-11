@@ -6,4 +6,8 @@ import com.landonthull.quotemaster.dto.CreateCustomerRequest;
 public interface CustomerService {
 
   Customer createCustomer(CreateCustomerRequest request);
+
+  Customer getCustomerById(Long id);
+
+
 }
