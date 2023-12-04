@@ -1,5 +1,6 @@
 package com.landonthull.quotemaster.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.landonthull.quotemaster.domain.UserRole;
 
 public class GetCurrentUserResponse {
@@ -7,7 +8,9 @@ public class GetCurrentUserResponse {
   private Long id;
   private String email;
   private UserRole role;
+  @JsonProperty("last_name")
   private String lastName;
+  @JsonProperty("first_name")
   private String firstName;
 
   public GetCurrentUserResponse(Long id, String email, UserRole role, String lastName,
