@@ -13,6 +13,7 @@ import com.landonthull.quotemaster.auth.UserDetail;
 import com.landonthull.quotemaster.controller.CustomerController;
 import com.landonthull.quotemaster.domain.Customer;
 import com.landonthull.quotemaster.dto.CreateCustomerRequest;
+import com.landonthull.quotemaster.repository.QuoteRepository;
 import com.landonthull.quotemaster.service.CustomerService;
 import com.landonthull.quotemaster.util.JwtTokenUtil;
 import java.sql.Timestamp;
@@ -36,6 +37,9 @@ public class CustomerControllerTests {
 
   @MockBean
   private CustomerService customerService;
+
+  @MockBean
+  private QuoteRepository quoteRepository;
 
   @MockBean
   private UserDetail userDetail;
