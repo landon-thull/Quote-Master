@@ -2,12 +2,7 @@ package com.landonthull.quotemaster.controller;
 
 import com.landonthull.quotemaster.domain.Customer;
 import com.landonthull.quotemaster.domain.QuoteStatus;
-import com.landonthull.quotemaster.dto.CreateCustomerRequest;
-import com.landonthull.quotemaster.dto.CreateCustomerResponse;
-import com.landonthull.quotemaster.dto.CustomerDto;
-import com.landonthull.quotemaster.dto.CustomerQuotesInfoDto;
-import com.landonthull.quotemaster.dto.PaginationInfo;
-import com.landonthull.quotemaster.dto.PaginationResponse;
+import com.landonthull.quotemaster.dto.*;
 import com.landonthull.quotemaster.repository.QuoteRepository;
 import com.landonthull.quotemaster.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -71,6 +66,14 @@ public class CustomerController {
 
     return new CustomerDto(customer, quotesInfo);
   }
+
+//  @GetMapping("/{id}/quotes")
+//  @Operation()
+//  public PaginationResponse<QuoteDto> getQuotesByCustomerId(
+//    @PathVariable Long id, @RequestParam int page, @RequestParam int limit
+//  ) {
+//
+//  }
 
   @GetMapping
   @Operation(summary = "Get all Customers",

@@ -1,6 +1,7 @@
 package com.landonthull.quotemaster.serviceimpl;
 
 import com.landonthull.quotemaster.domain.Customer;
+import com.landonthull.quotemaster.domain.Quote;
 import com.landonthull.quotemaster.domain.QuoteStatus;
 import com.landonthull.quotemaster.dto.CreateCustomerRequest;
 import com.landonthull.quotemaster.dto.CustomerQuotesInfoDto;
@@ -48,6 +49,23 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     return customerOptional.get();
+  }
+
+  @Override
+  public Page<Quote> getQuotesByCustomerId(Long id, int page, int count) {
+    Optional<Customer> customerOptional = customerRepository.findById(id);
+
+    if (customerOptional.isEmpty()) {
+      throw new ResourceNotFoundException("Customer", "id", id.toString());
+    }
+
+    Customer customer = customerOptional.get();
+
+    Pageable pageable = PageRequest.of(page, count);
+
+    Page<Quote> quotes = quoteRepository.findAllByCustomer(customer, pageable);
+
+    return quotes;
   }
 
   @Override
