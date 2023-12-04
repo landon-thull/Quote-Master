@@ -29,6 +29,9 @@ public class Quote {
   @Column(name = "id")
   private Long id;
 
+  @Column(name = "part_number")
+  private String partNumber;
+
   @Enumerated(value = EnumType.STRING)
   @Column(name = "status", nullable = false)
   private QuoteStatus status;
@@ -62,9 +65,10 @@ public class Quote {
     this.updatedAt = new Timestamp(System.currentTimeMillis());
   }
 
-  public Quote(Long id, QuoteStatus status, Customer customer, Date requestedOn, Date effectiveOn,
+  public Quote(Long id, String partNumber, QuoteStatus status, Customer customer, Date requestedOn, Date effectiveOn,
       Date expiresOn, Timestamp createdAt, Timestamp updatedAt) {
     this.id = id;
+    this.partNumber = partNumber;
     this.status = status;
     this.customer = customer;
     this.requestedOn = requestedOn;
@@ -89,6 +93,14 @@ public class Quote {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getPartNumber() {
+    return partNumber;
+  }
+
+  public void setPartNumber(String partNumber) {
+    this.partNumber = partNumber;
   }
 
   public QuoteStatus getStatus() {
