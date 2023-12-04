@@ -1,10 +1,13 @@
 package com.landonthull.quotemaster.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CustomerQuotesInfoDto {
 
   private long total;
   private long open;
   private long quoted;
+  @JsonProperty("no_quote")
   private long noQuote;
   private long cancelled;
 

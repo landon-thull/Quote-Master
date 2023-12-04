@@ -1,5 +1,6 @@
 package com.landonthull.quotemaster.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.landonthull.quotemaster.domain.Customer;
 import java.sql.Timestamp;
 
@@ -9,7 +10,9 @@ public class CustomerDto {
   private String name;
   private String notes;
   private String industry;
+  @JsonProperty("created_at")
   private Timestamp createdAt;
+  @JsonProperty("updated_at")
   private Timestamp updatedAt;
   private CustomerQuotesInfoDto quotes;
 

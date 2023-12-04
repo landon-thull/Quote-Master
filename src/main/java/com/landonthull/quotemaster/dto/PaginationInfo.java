@@ -1,64 +1,71 @@
 package com.landonthull.quotemaster.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class PaginationInfo {
 
-  private Long total_records;
-  private Integer current_page;
-  private Integer total_pages;
-  private Integer next_page;
-  private Integer prev_page;
+  @JsonProperty("total_records")
+  private Long totalRecords;
+  @JsonProperty("current_page")
+  private Integer currentPage;
+  @JsonProperty("total_pages")
+  private Integer totalPages;
+  @JsonProperty("next_page")
+  private Integer nextPage;
+  @JsonProperty("prev_page")
+  private Integer prevPage;
 
   public PaginationInfo(
-      Long total_records, Integer current_page, Integer total_pages, Integer next_page, Integer prev_page
+      Long totalRecords, Integer currentPage, Integer totalPages, Integer nextPage, Integer prevPage
   ) {
-    this.total_records = total_records;
-    this.current_page = current_page;
-    this.total_pages = total_pages;
-    this.next_page = next_page;
-    this.prev_page = prev_page;
+    this.totalRecords = totalRecords;
+    this.currentPage = currentPage;
+    this.totalPages = totalPages;
+    this.nextPage = nextPage;
+    this.prevPage = prevPage;
   }
 
   public PaginationInfo() {
 
   }
 
-  public Long getTotal_records() {
-    return total_records;
+  public Long getTotalRecords() {
+    return totalRecords;
   }
 
-  public void setTotal_records(Long total_records) {
-    this.total_records = total_records;
+  public void setTotalRecords(Long totalRecords) {
+    this.totalRecords = totalRecords;
   }
 
-  public Integer getCurrent_page() {
-    return current_page;
+  public Integer getCurrentPage() {
+    return currentPage;
   }
 
-  public void setCurrent_page(Integer current_page) {
-    this.current_page = current_page;
+  public void setCurrentPage(Integer currentPage) {
+    this.currentPage = currentPage;
   }
 
-  public Integer getTotal_pages() {
-    return total_pages;
+  public Integer getTotalPages() {
+    return totalPages;
   }
 
-  public void setTotal_pages(Integer total_pages) {
-    this.total_pages = total_pages;
+  public void setTotalPages(Integer totalPages) {
+    this.totalPages = totalPages;
   }
 
-  public Integer getNext_page() {
-    return next_page;
+  public Integer getNextPage() {
+    return nextPage;
   }
 
-  public void setNext_page(Integer next_page) {
-    this.next_page = next_page;
+  public void setNextPage(Integer nextPage) {
+    this.nextPage = nextPage;
   }
 
-  public Integer getPrev_page() {
-    return prev_page;
+  public Integer getPrevPage() {
+    return prevPage;
   }
 
-  public void setPrev_page(Integer prev_page) {
-    this.prev_page = prev_page;
+  public void setPrevPage(Integer prevPage) {
+    this.prevPage = prevPage;
   }
 }
